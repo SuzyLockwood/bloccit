@@ -22,6 +22,9 @@
     "password": null,
     "database": "database_production",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "postgres",
+    "logging": false,
+    "operatorsAliases": false,
+    "use_env_variable": "postgres://knoomeqreutval:8a0f1807e75d3054ee5ac30492a5147cc230b6d33a64df99aee8f98b11873964@ec2-54-225-68-133.compute-1.amazonaws.com:5432/d5naohkor8o20l"
   }
 }
