@@ -32,6 +32,9 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'userId',
       onDelete: 'CASCADE'
     });
+    Post.prototype.isOwner = function() {
+      return this.userId === this.foreignKey;
+    };
   };
   return Post;
 };
