@@ -5,7 +5,7 @@ module.exports = {
       role = req.body.role || role;
       id = req.body.userId || id;
       email = req.body.email || email;
-      if (id && id != 0) {
+      if (id & (id != 0)) {
         req.user = {
           id: id,
           email: email,
@@ -14,7 +14,6 @@ module.exports = {
       } else if (id == 0) {
         delete req.user;
       }
-
       if (next) {
         next();
       }

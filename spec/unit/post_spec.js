@@ -14,13 +14,13 @@ describe('Post', () => {
         email: 'starman@tesla.com',
         password: 'Trekkie4lyfe'
       }).then(user => {
-        this.user = user; //store the user
+        this.user = user;
 
         Topic.create(
           {
             title: 'Expeditions to Alpha Centauri',
             description:
-              'A compilation of reports from recent visits to the star system.',
+              'A compilation of reports from recent visits to the star system',
             posts: [
               {
                 title: 'My first visit to Proxima Centauri b',
@@ -36,8 +36,8 @@ describe('Post', () => {
             }
           }
         ).then(topic => {
-          this.topic = topic; //store the topic
-          this.post = topic.posts[0]; //store the post
+          this.topic = topic;
+          this.post = topic.posts[0];
           done();
         });
       });
@@ -66,15 +66,12 @@ describe('Post', () => {
           done();
         });
     });
+
     it('should not create a post with missing title, body, or assigned topic', done => {
       Post.create({
-        title: 'Pros of Cryosleep during the long journey'
+        title: 'Pros of Crysosleep during the long journey'
       })
         .then(post => {
-          // the code in this block will not be evaluated since the validation error
-          // will skip it. Instead, we'll catch the error in the catch block below
-          // and set the expectations there
-
           done();
         })
         .catch(err => {
@@ -84,7 +81,8 @@ describe('Post', () => {
         });
     });
   });
-  describe('#setTopic()', () => {
+
+  describe('setTopic()', () => {
     it('should associate a topic and a post together', done => {
       Topic.create({
         title: 'Challenges of interstellar travel',
@@ -98,7 +96,8 @@ describe('Post', () => {
       });
     });
   });
-  describe('#getTopic()', () => {
+
+  describe('getTopic()', () => {
     it('should return the associated topic', done => {
       this.post.getTopic().then(associatedTopic => {
         expect(associatedTopic.title).toBe('Expeditions to Alpha Centauri');
@@ -113,7 +112,6 @@ describe('Post', () => {
         password: 'password'
       }).then(newUser => {
         expect(this.post.userId).toBe(this.user.id);
-
         this.post.setUser(newUser).then(post => {
           expect(this.post.userId).toBe(newUser.id);
           done();
@@ -121,7 +119,6 @@ describe('Post', () => {
       });
     });
   });
-
   describe('#getUser()', () => {
     it('should return the associated topic', done => {
       this.post.getUser().then(associatedUser => {

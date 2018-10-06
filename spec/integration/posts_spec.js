@@ -19,7 +19,6 @@ describe('routes : posts', () => {
         password: 'Trekkie4lyfe'
       }).then(user => {
         this.user = user;
-
         Topic.create(
           {
             title: 'Winter Games',
@@ -46,6 +45,7 @@ describe('routes : posts', () => {
       });
     });
   });
+
   describe('GET /topics/:topicId/posts/new', () => {
     it('should render a new post form', done => {
       request.get(`${base}/${this.topic.id}/posts/new`, (err, res, body) => {
@@ -55,6 +55,7 @@ describe('routes : posts', () => {
       });
     });
   });
+
   describe('POST /topics/:topicId/posts/create', () => {
     it('should create a new post and redirect', done => {
       const options = {
@@ -62,7 +63,7 @@ describe('routes : posts', () => {
         form: {
           title: 'Watching snow melt',
           body:
-            'Without a doubt my favoriting things to do besides watching paint dry!'
+            'Without a doubt my favorite things to do besides watching paint dry!'
         }
       };
       request.post(options, (err, res, body) => {
@@ -71,7 +72,7 @@ describe('routes : posts', () => {
             expect(post).not.toBeNull();
             expect(post.title).toBe('Watching snow melt');
             expect(post.body).toBe(
-              'Without a doubt my favoriting things to do besides watching paint dry!'
+              'Without a doubt my favorite things to do besides watching paint dry!'
             );
             expect(post.topicId).not.toBeNull();
             done();
@@ -82,6 +83,7 @@ describe('routes : posts', () => {
           });
       });
     });
+
     it('should not create a new post that fails validations', done => {
       const options = {
         url: `${base}/${this.topic.id}/posts/create`,
@@ -116,10 +118,10 @@ describe('routes : posts', () => {
       );
     });
   });
+
   describe('POST /topics/:topicId/posts/:id/destroy', () => {
     it('should delete the post with the associated ID', done => {
       expect(this.post.id).toBe(1);
-
       request.post(
         `${base}/${this.topic.id}/posts/${this.post.id}/destroy`,
         (err, res, body) => {
@@ -132,6 +134,7 @@ describe('routes : posts', () => {
       );
     });
   });
+
   describe('GET /topics/:topicId/posts/:id/edit', () => {
     it('should render a view with an edit post form', done => {
       request.get(
@@ -145,6 +148,7 @@ describe('routes : posts', () => {
       );
     });
   });
+
   describe('POST /topics/:topicId/posts/:id/update', () => {
     it('should return a status code 302', done => {
       request.post(
@@ -166,8 +170,7 @@ describe('routes : posts', () => {
       const options = {
         url: `${base}/${this.topic.id}/posts/${this.post.id}/update`,
         form: {
-          title: 'Snowman Building Competition',
-          body: 'I love watching them melt slowly.'
+          title: 'Snowman Building Competition'
         }
       };
       request.post(options, (err, res, body) => {
@@ -176,7 +179,7 @@ describe('routes : posts', () => {
         Post.findOne({
           where: { id: this.post.id }
         }).then(post => {
-          expect(post.title).toBe('Snowman Building Competition');
+          expect(post.title).toBe('Snowball Fighting');
           done();
         });
       });
