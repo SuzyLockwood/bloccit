@@ -61,7 +61,7 @@ module.exports = {
   edit(req, res, next) {
     topicQueries.getTopic(req.params.id, (err, topic) => {
       if (err || topic == null) {
-        res.redirect(404, '/');
+        res.redirect(302, '/topics');
       } else {
         const authorized = new Authorizer(req.user, topic).edit();
         if (authorized) {
