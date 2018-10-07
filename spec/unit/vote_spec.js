@@ -117,6 +117,24 @@ describe('Vote', () => {
           done();
         });
     });
+    it('should not create a vote with a value of anything other than 1 or -1', done => {
+      Vote.create({
+        value: 2,
+        postId: this.post.id,
+        userId: this.user.id
+      })
+        .then(vote => {
+          // the code in this block will not be evaluated since the validation error
+          // will skip it. Instead, we'll catch the error in the catch block below
+          // and set the expectations there
+
+          done();
+        })
+        .catch(err => {
+          expect(err.message).toContain('Validation isIn on value failed');
+          done();
+        });
+    });
   });
   describe('#setUser()', () => {
     it('should associate a vote and a user together', done => {
